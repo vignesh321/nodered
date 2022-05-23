@@ -1,0 +1,404 @@
+[
+    {
+        "id": "234ca3c593fa3fa0",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "c88846a58ffd5192",
+        "type": "influxdb in",
+        "z": "234ca3c593fa3fa0",
+        "influxdb": "d4100b3ade9e64bf",
+        "name": "test",
+        "query": "",
+        "rawOutput": false,
+        "precision": "",
+        "retentionPolicy": "",
+        "org": "organisation",
+        "x": 450,
+        "y": 340,
+        "wires": [
+            [
+                "b140fe97efe54eb8"
+            ]
+        ]
+    },
+    {
+        "id": "f565972d2e6a1257",
+        "type": "debug",
+        "z": "234ca3c593fa3fa0",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1050,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "4b81b401eb99a402",
+        "type": "inject",
+        "z": "234ca3c593fa3fa0",
+        "name": "INJECT",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "*/15 0-23 * * *",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payloadType": "date",
+        "x": 180,
+        "y": 340,
+        "wires": [
+            [
+                "31be69e558d68b6e"
+            ]
+        ]
+    },
+    {
+        "id": "31be69e558d68b6e",
+        "type": "function",
+        "z": "234ca3c593fa3fa0",
+        "name": "",
+        "func": "\n var $today = new Date();\nvar d = new Date($today);\nd.setDate($today.getDate() - 1);\nd.setHours(18,30,0,0);\n var tstart=d.getTime();\n\n\n var tend=msg.payload;\n var q = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B01_INV1' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q1 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B01_INV2' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q2 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B01_INV3' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q3 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B01_INV4' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q4 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B02_INV1' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q5 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B02_INV2' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q6 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B02_INV3' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q7 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B02_INV4' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q8 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B03_INV1' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q9 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B03_INV2' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q10 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B03_INV3' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q11 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B03_INV4' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q12 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B04_INV1' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q13 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B04_INV2' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q14 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B04_INV3' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q15 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B04_INV4' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q16 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B05_INV1' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q17 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B05_INV2' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q18 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B05_INV3' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q19 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B05_INV4' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q20 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B06_INV1' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q21 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B06_INV2' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q22 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B06_INV3' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q23 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B06_INV4' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q24 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B01_INV1' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q25 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B01_INV2' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q26 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B01_INV3' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q27 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B01_INV4' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q28 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B02_INV1' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q29 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B02_INV2' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q30 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B02_INV3' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q31 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B02_INV4' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q32 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B03_INV1' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q33 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B03_INV2' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q34 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B03_INV3' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q35 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B03_INV4' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q36 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B04_INV1' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q37 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B04_INV2' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q38 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B04_INV3' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q39 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B04_INV4' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q40 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B05_INV1' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q41 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B05_INV2' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q42 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B05_INV3' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q43 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B05_INV4' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q44 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B06_INV1' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q45 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B06_INV2' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q46 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B06_INV3' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q47 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'B06_INV4' AND f = 'PDC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q48 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_EM01' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q49 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_EM01' AND f = 'PR') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q50 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_EM01' AND f = 'CUF') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\"; \n var q51 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_EM02' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q52 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_EM02' AND f = 'PR') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q53 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_EM02' AND f = 'CUF') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\"; \n var q54 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_EM03' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q55 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_EM03' AND f = 'PR') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q56 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_EM03' AND f = 'CUF') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\"; \n var q57 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_EM04' AND f = 'PAC') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q58 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_EM04' AND f = 'PR') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\";\n var q59 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_EM04' AND f = 'CUF') AND time >= \" + tstart + \"ms  and time <= \" + tend + \"ms  GROUP BY time(15m), d, f fill(null);\"; \n var q60 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_WS' AND f = 'SOLAR_RADIATION') AND time >= \" + tstart + \"ms and time <= \" +tend + \"ms GROUP BY time(15m), d,f fill(null);\";\n var q61 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_WS' AND f = 'SOLAR_RADIATION_TILT') AND time >= \" + tstart + \"ms and time <= \" +tend + \"ms GROUP BY time(15m),d,f fill(null);\";\n var q62 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_WS' AND f = 'AIR_TEMP') AND time >= \" + tstart + \"ms and time <= \" +tend + \"ms GROUP BY time(15m),d, f fill(null);\";\n var q63 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_WS' AND f = 'MODULE_TEMP') AND time >= \" + tstart + \"ms and time <= \" +tend + \"ms GROUP BY time(15m),d, f fill(null);\";\n var q64 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_WS' AND f = 'WIND_SPEED') AND time >= \" + tstart + \"ms and time <= \" +tend + \"ms GROUP BY time(15m),d,f fill(null);\";\n var q65 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_WS' AND f = 'WIND_DIRECTION') AND time >= \" + tstart + \"ms and time <= \" +tend + \"ms GROUP BY time(15m), d,f fill(null);\";\n var q66 = \"SELECT last(value) FROM scaback_csv WHERE (d = 'CR_WS' AND f = 'HUMDITIY') AND time >= \" + tstart + \"ms and time <= \" +tend + \"ms GROUP BY time(15m), d,f fill(null);\"\n\nmsg.query = q+q1+q2+q3+q4+q5+q6+q7+q8+q9+q10+q11+q12+q13+q14+q15+q16+q17+q18+q19+q20+q21+q22+q23+q24+q25+q26+q27+q28+q29+q30+q31+q32+q33+q34+q35+q36+q37+q38+q39+q40+q41+q42+q43+q44+q45+q46+q47+q48+q49+q50+q51+q52+q53+q54+q55+q56+q57+q58+q59+q60+q61+q62+q63+q64+q65+q66\n//msg.payload=tstart\nreturn msg;\n\n\n\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 340,
+        "wires": [
+            [
+                "c88846a58ffd5192"
+            ]
+        ]
+    },
+    {
+        "id": "65d97552f1cfbb81",
+        "type": "csv",
+        "z": "234ca3c593fa3fa0",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "all",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 790,
+        "y": 340,
+        "wires": [
+            [
+                "1ec9d46d5e66fd49"
+            ]
+        ]
+    },
+    {
+        "id": "1ec9d46d5e66fd49",
+        "type": "function",
+        "z": "234ca3c593fa3fa0",
+        "name": "todays date",
+        "func": "var today = new Date().toISOString().slice(0, 10);\n\n\n\n//console.log(formatDate(today));\n\nvar c =today;\ncontext.set('c',c)\n\nvar path = \"/usr/src/node-red/ftp/ftptest\"+c+\".csv\"\nmsg.filename = path\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 440,
+        "wires": [
+            [
+                "fb91c2a78c583d54"
+            ]
+        ]
+    },
+    {
+        "id": "ede947f085bb1215",
+        "type": "inject",
+        "z": "234ca3c593fa3fa0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload.data",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "repeat": "900",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 290,
+        "y": 520,
+        "wires": [
+            [
+                "bbf307a0b8a67fe9"
+            ]
+        ]
+    },
+    {
+        "id": "538a36615d36a138",
+        "type": "debug",
+        "z": "234ca3c593fa3fa0",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "29e9adc3182bc3f5",
+        "type": "comment",
+        "z": "234ca3c593fa3fa0",
+        "name": "SFTP push",
+        "info": "",
+        "x": 340,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "bbf307a0b8a67fe9",
+        "type": "function",
+        "z": "234ca3c593fa3fa0",
+        "name": "filename",
+        "func": "var today = new Date().toISOString().slice(0, 10);\n\n\n\n//console.log(formatDate(today));\n\nvar c =today;\ncontext.set('c',c)\n\n\nmsg.payload.data = \"/usr/src/node-red/ftp/ftptest\"+c+\".csv\"\n//msg.payload.filename=\"/ftp/solarlog/archive\"\nmsg.payload.filename=\"ftptest_\"+c+\".csv\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 520,
+        "wires": [
+            [
+                "76cf506330570e63"
+            ]
+        ]
+    },
+    {
+        "id": "76cf506330570e63",
+        "type": "sftp in",
+        "z": "234ca3c593fa3fa0",
+        "name": "",
+        "sftp": "",
+        "operation": "put",
+        "filename": "",
+        "localFilename": "",
+        "workdir": "/home/iplon/tmp/sirusilla",
+        "x": 650,
+        "y": 520,
+        "wires": [
+            [
+                "538a36615d36a138"
+            ]
+        ]
+    },
+    {
+        "id": "fb91c2a78c583d54",
+        "type": "file",
+        "z": "234ca3c593fa3fa0",
+        "name": "test",
+        "filename": "",
+        "appendNewline": true,
+        "createDir": true,
+        "overwriteFile": "true",
+        "encoding": "none",
+        "x": 950,
+        "y": 440,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b140fe97efe54eb8",
+        "type": "function",
+        "z": "234ca3c593fa3fa0",
+        "name": "",
+        "func": "\n  \n let plantObj\n\nplantObj = []\n\n   for (var i = 0; i < msg.payload[0].length;i++)\n \n\n{\n //  new Date(msg.payload[i].time).getTime() \nvar dateUTC = new Date(msg.payload[0][i].time).toLocaleString(\"en-US\", {timeZone: 'Asia/Kolkata'})\n\n\n\n var obj= \n {\n TIME:dateUTC,\n B01_INV1_PAC:msg.payload[0][i].last,\n B01_INV2_PAC:msg.payload[1][i].last,\n B01_INV3_PAC:msg.payload[2][i].last,\n B01_INV4_PAC:msg.payload[3][i].last,\n B02_INV1_PAC:msg.payload[4][i].last,\n B02_INV2_PAC:msg.payload[5][i].last,\n B02_INV3_PAC:msg.payload[6][i].last,\n B02_INV4_PAC:msg.payload[7][i].last,\n B03_INV1_PAC:msg.payload[8][i].last,\n B03_INV2_PAC:msg.payload[9][i].last,\n B03_INV3_PAC:msg.payload[10][i].last,\n B03_INV4_PAC:msg.payload[11][i].last,\n B04_INV1_PAC:msg.payload[12][i].last,\n B04_INV2_PAC:msg.payload[13][i].last,\n B04_INV3_PAC:msg.payload[14][i].last,\n B04_INV4_PAC:msg.payload[15][i].last,\n B05_INV1_PAC:msg.payload[16][i].last,\n B05_INV2_PAC:msg.payload[17][i].last,\n B05_INV3_PAC:msg.payload[18][i].last,\n B05_INV4_PAC:msg.payload[19][i].last,\n B06_INV1_PAC:msg.payload[20][i].last,\n B06_INV2_PAC:msg.payload[21][i].last,\n B06_INV3_PAC:msg.payload[22][i].last,\n B06_INV4_PAC:msg.payload[23][i].last,\n B01_INV1_PDC:msg.payload[24][i].last,\n B01_INV2_PDC:msg.payload[25][i].last,\n B01_INV3_PDC:msg.payload[26][i].last,\n B01_INV4_PDC:msg.payload[27][i].last,\n B02_INV1_PDC:msg.payload[28][i].last,\n B02_INV2_PDC:msg.payload[29][i].last,\n B02_INV3_PDC:msg.payload[30][i].last,\n B02_INV4_PDC:msg.payload[31][i].last,\n B03_INV1_PDC:msg.payload[32][i].last,\n B03_INV2_PDC:msg.payload[33][i].last,\n B03_INV3_PDC:msg.payload[34][i].last,\n B03_INV4_PDC:msg.payload[35][i].last,\n B04_INV1_PDC:msg.payload[36][i].last,\n B04_INV2_PDC:msg.payload[37][i].last,\n B04_INV3_PDC:msg.payload[38][i].last,\n B04_INV4_PDC:msg.payload[39][i].last,\n B05_INV1_PDC:msg.payload[40][i].last,\n B05_INV2_PDC:msg.payload[41][i].last,\n B05_INV3_PDC:msg.payload[42][i].last,\n B05_INV4_PDC:msg.payload[43][i].last,\n B06_INV1_PDC:msg.payload[44][i].last,\n B06_INV2_PDC:msg.payload[45][i].last,\n B06_INV3_PDC:msg.payload[46][i].last,\n B06_INV4_PDC:msg.payload[47][i].last,\n CR_EM01_PAC:msg.payload[48][i].last,\n CR_EM01_PR:msg.payload[49][i].last,\n CR_EM01_CUF:msg.payload[50][i].last,\n CR_EM02_PAC:msg.payload[51][i].last,\n CR_EM02_PR:msg.payload[52][i].last,\n CR_EM02_CUF:msg.payload[53][i].last,\n CR_EM03_PAC:msg.payload[54][i].last,\n CR_EM03_PR:msg.payload[55][i].last,\n CR_EM03_CUF:msg.payload[56][i].last,\n CR_EM04_PAC:msg.payload[57][i].last\n //CR_EM04_PR:msg.payload[58][i].last,\n //CR_EM04_CUF:msg.payload[59][i].last,\n //CR_WS_SOLAR_RADIATION:msg.payload[60][i].last,\n //CR_WS_SOLAR_RADIATION_TILT:msg.payload[61][i].last,\n //CR_WS_AIR_TEMP:msg.payload[62][i].last,\n //CR_WS_MODULE_TEMP:msg.payload[63][i].last,\n //CR_WS_WIND_SPEED:msg.payload[64][i].last,\n //CR_WS_WIND_DIRECTION:msg.payload[65][i].last\n //CR_WS_HUMDITIY:msg.payload[66][i].last\n \n\n \n \n \n }\n \n     \n \n \n  plantObj.push(obj)\n}\n\nmsg.payload = plantObj\n\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 340,
+        "wires": [
+            [
+                "65d97552f1cfbb81",
+                "8f79d65cbd67586b"
+            ]
+        ]
+    },
+    {
+        "id": "634c5e4bd2c82909",
+        "type": "file in",
+        "z": "234ca3c593fa3fa0",
+        "name": "",
+        "filename": "",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 480,
+        "y": 660,
+        "wires": [
+            [
+                "14db93151fa85792"
+            ]
+        ]
+    },
+    {
+        "id": "5055fb4ff4b7d8d4",
+        "type": "inject",
+        "z": "234ca3c593fa3fa0",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 160,
+        "y": 660,
+        "wires": [
+            [
+                "7ebc19704c17d9aa"
+            ]
+        ]
+    },
+    {
+        "id": "14db93151fa85792",
+        "type": "csv",
+        "z": "234ca3c593fa3fa0",
+        "name": "",
+        "sep": ",",
+        "hdrin": true,
+        "hdrout": "once",
+        "multi": "mult",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 650,
+        "y": 660,
+        "wires": [
+            [
+                "d88fdc2fb3032fd5"
+            ]
+        ]
+    },
+    {
+        "id": "d88fdc2fb3032fd5",
+        "type": "debug",
+        "z": "234ca3c593fa3fa0",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "7ebc19704c17d9aa",
+        "type": "function",
+        "z": "234ca3c593fa3fa0",
+        "name": "todays date",
+        "func": "var today = new Date().toISOString().slice(0, 10);\n\n\n\n//console.log(formatDate(today));\n\nvar c =today;\ncontext.set('c',c)\n\nvar path = \"/usr/src/node-red/ftp/ftptest\"+c+\".csv\"\nmsg.filename = path\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 660,
+        "wires": [
+            [
+                "634c5e4bd2c82909"
+            ]
+        ]
+    },
+    {
+        "id": "8f79d65cbd67586b",
+        "type": "debug",
+        "z": "234ca3c593fa3fa0",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 730,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "d4100b3ade9e64bf",
+        "type": "influxdb",
+        "hostname": "192.168.64.84",
+        "port": "8086",
+        "protocol": "http",
+        "database": "iSolar",
+        "name": "",
+        "usetls": false,
+        "tls": "c563e3c6072c32be",
+        "influxdbVersion": "1.x",
+        "url": "http://localhost:8086",
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "c563e3c6072c32be",
+        "type": "tls-config",
+        "name": "",
+        "cert": "",
+        "key": "",
+        "ca": "",
+        "certname": "",
+        "keyname": "",
+        "caname": "",
+        "servername": "",
+        "verifyservercert": false,
+        "alpnprotocol": ""
+    }
+]
